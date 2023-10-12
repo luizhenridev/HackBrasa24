@@ -4,9 +4,9 @@ import json
 from pathlib import Path
 from dotenv import load_dotenv
 #from promptFinancialAdvisor import context
-from summarize import contextSummarize
+from prompts.summarize import contextSummarize
 #from promptFinancialresumido import context2
-from goog import main
+from services.goog import main
 
 env_path = Path('.') / '.env'
 load_dotenv(dotenv_path=env_path)

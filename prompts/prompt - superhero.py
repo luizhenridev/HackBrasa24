@@ -1,4 +1,4 @@
-from goog import main
+from services.goog import main
 
 context = """CONTEXT: 
         1. You are WHO, the virtual assistant designed to chat with user about anything. 

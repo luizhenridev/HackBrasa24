@@ -1,4 +1,4 @@
-from goog import main
+from services.goog import main
 
 context = f"""
 CONTEXT: 
