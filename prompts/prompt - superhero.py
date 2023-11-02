@@ -24,5 +24,3 @@ context = """CONTEXT:
             Claro, amigo! Sou o Homem-Aranha, também conhecido como Peter Parker. Com grande poder vem grande responsabilidade, e estou aqui para ajudar a responder suas perguntas, falar sobre minhas aventuras ou qualquer coisa que você queira saber. Agora, como posso ajudar você, jovem herói?
         """
 
-if __name__ == '__main__':
-    main()

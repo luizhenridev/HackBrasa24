@@ -4,7 +4,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
-from services.gpt import gen
+from services.gpt import gen, intention, explorer
 
 
 logger = logging.getLogger(__name__)
@@ -17,7 +17,7 @@ BOT_USERNAME = os.environ.get('BOT_USERNAME')
 
 #Commands
 async def start_command(update:Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Hello! Thanks for chatting with me! I am Who")
+    await update.message.reply_text("Olá, obrigado por falar comigo eu sou a Aurora!")
 
 async def help_command(update:Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("I'm Who! Please Type someting so I can respond")
@@ -27,27 +27,45 @@ async def custom_command(update:Update, context: ContextTypes.DEFAULT_TYPE):
 
 chatConversation = []
 
-max_messages = 4
+max_messages = 2
 
 #Responses
 def handle_response(text: str, userId:int) -> str:
     processed: str = text.lower()
     users = (userId)
+    inte = intention(processed, id_model= "gpt-4", max_tokens= 1000)
+    
+    if  inte == "1":
+        chatConversation.append(processed)
 
-    chatConversation.append(processed)
+        if len(chatConversation) > max_messages:
+            chatConversation.pop(0)
 
-    if len(chatConversation) > max_messages:
-        chatConversation.pop(0)
+        string= ' '.join([str(element) for element in chatConversation])
+        string = string.strip()
 
-    string= ' '.join([str(element) for element in chatConversation])
-    string = string.strip()
+        answer = gen(string, users ,id_model = "gpt-4", max_tokens= 1000)
+        answer = answer.strip()
 
-    answer = gen(string, users ,id_model = "gpt-3.5-turbo", max_tokens= 100)
-    answer = answer.strip()
+        chatConversation.append(answer)
+        print(chatConversation)
+        return answer
+    else :
+        chatConversation.append(processed)
 
-    chatConversation.append(answer)
-    print(chatConversation)
-    return answer
+        if len(chatConversation) > max_messages:
+            chatConversation.pop(0)
+
+        string= ' '.join([str(element) for element in chatConversation])
+        string = string.strip()
+
+        answer = explorer(string, users ,id_model = "gpt-4", max_tokens= 1000)
+        answer = answer.strip()
+
+        chatConversation.append(answer)
+        print(chatConversation)
+        return answer
+
 
 
 
@@ -62,7 +80,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if message_type == 'group':
         if BOT_USERNAME in text:
             new_text:str = text.replace(BOT_USERNAME, '').strip()
-            response: str = handle_response(new_text)
+            response: str = handle_response(new_text, userId)
         else:
             return
     else:

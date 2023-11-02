@@ -15,7 +15,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 # The ID and range of a sample spreadsheet.
 #LUIZ
 SAMPLE_SPREADSHEET_ID = '1pSaeUKxJdFgw4D9t0EzYBRBCC6rSXswgvE2qqovw7U4'
-SAMPLE_RANGE_NAME = 'Teste!C:Q'
+SAMPLE_RANGE_NAME = 'teste2!C:H'
 #PAULO
 SAMPLE_SPREADSHEET_IDP = '1PjOmfOKuU1ORlWmTO7LfvU_Lmd5HAYTDHrO_ULrc3iM'
 SAMPLE_RANGE_NAMEP = 'TABELA!C:Q'
