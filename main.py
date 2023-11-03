@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 from services.gpt import gen, intention, explorer
+from services.goog import input
 
 
 logger = logging.getLogger(__name__)
@@ -74,8 +75,19 @@ def handle_response(text: str, userId:int) -> str:
         string= ' '.join([str(element) for element in chatConversation])
         string = string.strip()
 
-        answer = input(string)
-        answer = answer.strip()
+        text = string
+        number = ""
+        for char in text:
+            if char.isdigit():
+                number += char
+            elif number:
+                break  # Stop when a non-digit character is encountered
+        if number:
+            extracted_number = number
+            print(extracted_number)
+
+    
+        answer = input(extracted_number)
 
         chatConversation.append(answer)
         print(chatConversation)
