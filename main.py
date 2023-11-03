@@ -50,7 +50,7 @@ def handle_response(text: str, userId:int) -> str:
         chatConversation.append(answer)
         print(chatConversation)
         return answer
-    else :
+    elif inte == "0" :
         chatConversation.append(processed)
 
         if len(chatConversation) > max_messages:
@@ -60,6 +60,21 @@ def handle_response(text: str, userId:int) -> str:
         string = string.strip()
 
         answer = explorer(string, users ,id_model = "gpt-4", max_tokens= 1000)
+        answer = answer.strip()
+
+        chatConversation.append(answer)
+        print(chatConversation)
+        return answer
+    else:
+        chatConversation.append(processed)
+
+        if len(chatConversation) > max_messages:
+            chatConversation.pop(0)
+
+        string= ' '.join([str(element) for element in chatConversation])
+        string = string.strip()
+
+        answer = input(string)
         answer = answer.strip()
 
         chatConversation.append(answer)

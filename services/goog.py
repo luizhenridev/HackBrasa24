@@ -161,6 +161,66 @@ def main(userId):
     except HttpError as err:
         print(err)
 
+def rangeSheets():
+    """Shows basic usage of the Sheets API.
+    Prints values from a sample spreadsheet.
+    """
+    creds = None
+    # The file token.json stores the user's access and refresh tokens, and is
+    # created automatically when the authorization flow completes for the first
+    # time.
+    if os.path.exists('token.json'):
+        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+    # If there are no (valid) credentials available, let the user log in.
+    if not creds or not creds.valid:
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file(
+                'credentials.json', SCOPES)
+            creds = flow.run_local_server(port=0)
+        # Save the credentials for the next run
+        with open('token.json', 'w') as token:
+            token.write(creds.to_json())
+
+    try:
+        service = build('sheets', 'v4', credentials=creds)
+
+        # Call the Sheets API
+        sheet = service.spreadsheets()
+
+        data_filters = [
+            {
+                "developerMetadataLookup":{
+                    "metadaLocation":{
+                        "spreadsheet":True
+                    },
+                    "metadataKey":"Julho" # Replace with the actual column name
+                },
+                "condition":{
+                    "type":"TEXT_EQ",
+                    "values":["telefone"] # Replace with the specific value to search for
+                }
+            }
+        ]
+
+
+        result = sheet.values().batchGetByDataFilter(spreadsheetId=SAMPLE_SPREADSHEET_ID, body=data_filters).execute()
+        values = result.get('values', [])
+
+        return values
+       
+        
+        
+
+
+        
+    except HttpError as err:
+        print(err)
+
+
+
+
 def filtro(categoria):
     """Shows basic usage of the Sheets API.
     Prints values from a sample spreadsheet.
@@ -197,7 +257,7 @@ def filtro(categoria):
         dados_filtrados = (df[df['Segmentação'] == categoria ])
  
 
-        n = 200
+        n = 150
         
         list_df = [dados_filtrados[i:i+n] for i in range(0,len(dados_filtrados),n)]
         
@@ -217,10 +277,7 @@ def filtro(categoria):
         print(err)
 
 
-def input(lista):
-    """Shows basic usage of the Sheets API.
-    Prints values from a sample spreadsheet.
-    """
+def input(lista = "30"):
     creds = None
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -240,26 +297,33 @@ def input(lista):
             token.write(creds.to_json())
 
     try:
+        CELL = 'teste2!E16'
         service = build('sheets', 'v4', credentials=creds)
+        sheet = service.spreadsheets()
+
+        result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                        range=CELL).execute()
+        values = result.get('values', [])
+        valueInt=int(values[0][0])
+        listaInt = int(lista)
+        
+        result = valueInt + listaInt
+       
 
         # Call the Sheets API
-        sheet = service.spreadsheets()
-        valor_adicionar = lista
-        result = sheet.values().append(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-                                    range=SAMPLE_RANGE_NAME,valueInputOption="USER_ENTERED", body={'values': valor_adicionar}).execute()
-        values = result.get('values', [])
-
-        if not values:
-            print('No data found.')
-            return
-
-        print('Name, Major:')
-        for row in values:
-            # Print columns A and E, which correspond to indices 0 and 4.
-            print('%s, %s' % (row[0], row[4]))
+       
+        valor_adicionar = [[]]
+        valor_adicionar[0].append(result)
+        result = sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                    range=CELL,valueInputOption="USER_ENTERED", body={'values': valor_adicionar}).execute()
+       
     except HttpError as err:
         print(err)
 
+    answer = "Despesa adicionada com sucesso!"
+    
+    return answer 
+
 
 if __name__ == '__main__':
-    main()
+    input()

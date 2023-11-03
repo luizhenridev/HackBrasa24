@@ -84,14 +84,15 @@ def summarize(text, id_model = "gpt-4", max_tokens = 100):
 def intention(text = "Como você pode me ajudar?", id_model = "gpt-4", max_tokens = 1000):
     intentions = f"""
 CONTEXT: 
-    1. You will answer 0 or 1 based in your input.
+    1. You will answer 0, 1 or 2 based in your input.
 
 TASKS: 
     1. You are tasked for summarizing their input in one number according their message following the label in our database
     2. Your objective is understand what is the intention of user
-    3. There are 2 intentions 
+    3. There are 3 intentions 
         0 - Explorer
-        1 - Not Explorer
+        1 - Consultant
+        2 - Adder
 
 EXAMPLES:
     ##note: These examples are for you undestand how to work.   
@@ -119,6 +120,18 @@ EXAMPLES:
             Liste um top 3 áreas que mais gastei
             recommended answer:
             1
+
+        Example 5: 
+            user message: 
+            Quero adicionar 100 reais nas despesas
+            recommended answer:
+            2
+
+        Example 5: 
+            user message: 
+            Quero adicionar 100 reais em habitação
+            recommended answer:
+            2
  """
 
     body_message = {
