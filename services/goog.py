@@ -277,14 +277,12 @@ def filtro(categoria):
         print(err)
 
 
-def input(lista = "30"):
+def input(lista, userId):
     creds = None
-    # The file token.json stores the user's access and refresh tokens, and is
-    # created automatically when the authorization flow completes for the first
-    # time.
+   
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
-    # If there are no (valid) credentials available, let the user log in.
+    
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
@@ -292,30 +290,71 @@ def input(lista = "30"):
             flow = InstalledAppFlow.from_client_secrets_file(
                 'credentials.json', SCOPES)
             creds = flow.run_local_server(port=0)
-        # Save the credentials for the next run
+        
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
 
     try:
-        CELL = 'teste2!E16'
-        service = build('sheets', 'v4', credentials=creds)
-        sheet = service.spreadsheets()
+        if userId == 2022078829: #LUIZ
+            CELL = 'teste2!E16'
+            service = build('sheets', 'v4', credentials=creds)
+            sheet = service.spreadsheets()
 
-        result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-                                        range=CELL).execute()
-        values = result.get('values', [])
-        valueInt=int(values[0][0])
-        listaInt = int(lista)
+            result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                            range=CELL).execute()
+            values = result.get('values', [])
+            valueInt=int(values[0][0])
+            listaInt = int(lista)
+            
+            result = valueInt + listaInt
         
-        result = valueInt + listaInt
-       
 
-        # Call the Sheets API
-       
-        valor_adicionar = [[]]
-        valor_adicionar[0].append(result)
-        result = sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-                                    range=CELL,valueInputOption="USER_ENTERED", body={'values': valor_adicionar}).execute()
+            # Call the Sheets API
+        
+            valor_adicionar = [[]]
+            valor_adicionar[0].append(result)
+            result = sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                        range=CELL,valueInputOption="USER_ENTERED", body={'values': valor_adicionar}).execute()
+        elif userId == 1081219056: #PAULO
+            CELL = 'teste2!E16'
+            service = build('sheets', 'v4', credentials=creds)
+            sheet = service.spreadsheets()
+
+            result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_IDP,
+                                            range=CELL).execute()
+            values = result.get('values', [])
+            valueInt=int(values[0][0])
+            listaInt = int(lista)
+            
+            result = valueInt + listaInt
+        
+
+            # Call the Sheets API
+        
+            valor_adicionar = [[]]
+            valor_adicionar[0].append(result)
+            result = sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                        range=CELL,valueInputOption="USER_ENTERED", body={'values': valor_adicionar}).execute()
+        elif userId == 1088540336: #ANDREY
+            CELL = 'teste2!E16'
+            service = build('sheets', 'v4', credentials=creds)
+            sheet = service.spreadsheets()
+
+            result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_IDA,
+                                            range=CELL).execute()
+            values = result.get('values', [])
+            valueInt=int(values[0][0])
+            listaInt = int(lista)
+            
+            result = valueInt + listaInt
+        
+
+            # Call the Sheets API
+        
+            valor_adicionar = [[]]
+            valor_adicionar[0].append(result)
+            result = sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                        range=CELL,valueInputOption="USER_ENTERED", body={'values': valor_adicionar}).execute()
        
     except HttpError as err:
         print(err)

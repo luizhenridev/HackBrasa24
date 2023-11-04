@@ -87,7 +87,7 @@ def handle_response(text: str, userId:int) -> str:
             print(extracted_number)
 
     
-        answer = input(extracted_number)
+        answer = input(extracted_number, userId)
 
         chatConversation.append(answer)
         print(chatConversation)
