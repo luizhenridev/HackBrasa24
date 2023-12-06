@@ -277,7 +277,7 @@ def filtro(categoria):
         print(err)
 
 
-def input(lista, userId):
+def input(extracted_number, userId):
     creds = None
    
     if os.path.exists('token.json'):
@@ -304,7 +304,7 @@ def input(lista, userId):
                                             range=CELL).execute()
             values = result.get('values', [])
             valueInt=int(values[0][0])
-            listaInt = int(lista)
+            listaInt = int(extracted_number)
             
             result = valueInt + listaInt
         
@@ -324,7 +324,7 @@ def input(lista, userId):
                                             range=CELL).execute()
             values = result.get('values', [])
             valueInt=int(values[0][0])
-            listaInt = int(lista)
+            listaInt = int(extracted_number)
             
             result = valueInt + listaInt
         
@@ -344,7 +344,7 @@ def input(lista, userId):
                                             range=CELL).execute()
             values = result.get('values', [])
             valueInt=int(values[0][0])
-            listaInt = int(lista)
+            listaInt = int(extracted_number)
             
             result = valueInt + listaInt
         

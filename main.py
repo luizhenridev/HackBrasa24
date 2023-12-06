@@ -39,8 +39,9 @@ def handle_response(text: str, userId:int) -> str:
     if  inte == "1":
         chatConversation.append(processed)
 
-        if len(chatConversation) > max_messages:
+        if len(chatConversation) >= max_messages:
             chatConversation.pop(0)
+            
 
         string= ' '.join([str(element) for element in chatConversation])
         string = string.strip()
@@ -54,8 +55,9 @@ def handle_response(text: str, userId:int) -> str:
     elif inte == "0" :
         chatConversation.append(processed)
 
-        if len(chatConversation) > max_messages:
+        if len(chatConversation) >= max_messages:
             chatConversation.pop(0)
+            
 
         string= ' '.join([str(element) for element in chatConversation])
         string = string.strip()
@@ -69,10 +71,11 @@ def handle_response(text: str, userId:int) -> str:
     else:
         chatConversation.append(processed)
 
-        if len(chatConversation) > max_messages:
-            chatConversation.pop(0)
+        if len(chatConversation) >= max_messages:
+           chatConversation.pop(0)
+           
 
-        string= ' '.join([str(element) for element in chatConversation])
+        string= ' '.join([str(element) for element in chatConversation[-1]])
         string = string.strip()
 
         text = string
