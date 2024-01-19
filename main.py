@@ -6,6 +6,7 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 from services.gpt import gen, intention, explorer
 from services.goog import input
+from database.database import checkUser, createUser
 
 
 logger = logging.getLogger(__name__)
@@ -31,9 +32,11 @@ chatConversation = []
 max_messages = 2
 
 #Responses
-def handle_response(text: str, userId:int) -> str:
+def handle_response(text: str, userId:str) -> str:
     processed: str = text.lower()
     users = (userId)
+
+
     inte = intention(processed, id_model= "gpt-4", max_tokens= 1000)
     
     if  inte == "1":
@@ -104,6 +107,15 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message_type: str = update.message.chat.type
     text: str = update.message.text
     userId: int = update.message.chat.id
+    userFirstName: str = update.message.from_user.first_name
+    userLastName: str= update.message.from_user.last_name
+    fullUserName: str = f"{userFirstName} {userLastName}" 
+    cellphoneNumber: str = "85"
+    chat_id: int = update.message.chat_id
+    message_id: int = update.message.message_id
+
+    if checkUser(userId) == False:
+        createUser(userId, fullUserName, cellphoneNumber)
 
     print(f'User({userId}) in {message_type}: "{text}"')
 
@@ -117,7 +129,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         response: str = handle_response(text, userId)
     
     print('Bot:', response)
-    await update.message.reply_text(response)
+    await update.message.reply_text(response, connect_timeout=10)
 
 async def error(update: Update, context:ContextTypes.DEFAULT_TYPE):
     print(f'Update {update} caused error {context.error}')
@@ -139,4 +151,4 @@ if __name__ == '__main__':
 
     #Polls the bot
     print('Polling...')
-    app.run_polling(poll_interval=3)
+    app.run_polling(poll_interval=10)
