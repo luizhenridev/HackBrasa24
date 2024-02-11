@@ -1,7 +1,7 @@
 import psycopg2
 import logging
 import datetime
-from uuid import UUID
+import uuid
 
 con: psycopg2.extensions.connection
 
@@ -62,8 +62,13 @@ def createUser (userId:int, name:str, cellphone_number:str) :
     except Exception as e:
         logging.error(f"[DATABASE] An error ocurred while inserting an user on database, user_id: {userId}, name: {name}, cellphone_number: {cellphone_number} and created_at: {currentDate}")
 
+    finally:
+        if con:
+            cursor.close()
+            con.close()
 
-def addMessages(chat_id: UUID, message_id:  UUID, body_message: str, user_id: int):
+
+def addMessages(chat_id: uuid.UUID, message_id:  uuid.UUID, body_message: str, user_id: int):
     currentDate = datetime.datetime.now()
     try:
         con = connectDatabase("auroradb", "aurora", "aurora123", "localhost", "5432")
@@ -82,3 +87,58 @@ def addMessages(chat_id: UUID, message_id:  UUID, body_message: str, user_id: in
     except Exception as e:
         logging.error(f"[DATABASE] An error occured while was inserting a message in the database. chat_id: {chat_id}, user_id: {user_id},message_id: {message_id} ")
 
+    finally:
+        if con:
+            cursor.close()
+            con.close()
+
+def addSpending( user_id: int, description_spend: str, value_spend: float):
+    currentDate = datetime.datetime.now()
+    spend_id = uuid.uuid4()
+    try:
+        con = connectDatabase("auroradb", "aurora", "aurora123", "localhost", "5432")
+        cursor = con.cursor()
+        insertQuery = '''
+                                INSERT INTO "auroraAI"."spending"
+                                    (spend_id, user_id, spend_date, description_spend, value_spend)
+                                    VALUES(%s, %s, %s, %s, %s)
+                                '''
+        values = (spend_id, user_id, currentDate, description_spend, value_spend)
+        cursor.execute(insertQuery, values)
+        con.commit()
+        message = f"[DATABASE] A successful spend inserted on Database spend_id: {spend_id}, user_id: {user_id}"
+        logging.info(message)
+        return None
+    except Exception as e:
+        logging.error(f"[DATABASE] An error occured while was inserting a spend in the database.  user_id: {user_id}, date: {currentDate},  ")
+
+    finally:
+        if con:
+            cursor.close()
+            con.close()
+
+
+def getSpending( user_id: int):
+    currentDate = datetime.datetime.now()
+    spend_id = uuid.uuid4()
+    try:
+        con = connectDatabase("auroradb", "aurora", "aurora123", "localhost", "5432")
+        cursor = con.cursor()
+        selectQuery = '''
+                                SELECT spend_id, user_id, spend_date, description_spend, value_spend 
+                                FROM "auroraAI"."spending"
+                                WHERE user_id = %s
+                                '''
+        values = (user_id)
+        cursor.execute(selectQuery, values)
+        con.commit()
+        message = f"[DATABASE] A successful select of spending for user_id: {user_id}"
+        logging.info(message)
+        return None
+    except Exception as e:
+        logging.error(f"[DATABASE] An error occured while was selecting the specified query in the database.  user_id: {user_id}, date: {currentDate}")
+
+    finally:
+        if con:
+            cursor.close()
+            con.close()
