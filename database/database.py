@@ -1,8 +1,7 @@
 import psycopg2
 import logging
 import datetime
-import uuid
-from typing import UUID
+from uuid import UUID
 
 con: psycopg2.extensions.connection
 
