@@ -22,7 +22,7 @@ def connectDatabase(database, user, password, host, port) -> psycopg2.extensions
     
 def checkUser(userId:int) -> bool:
     try:
-        con = connectDatabase("auroradb", "aurora", "aurora123", "localhost", "5432")
+        con = connectDatabase("auroradb", "aurora", "aurora123", "localhost", "6432")
         cursor = con.cursor()
         query = 'SELECT user_id FROM "auroraAI"."user" WHERE user_id = %s'
         cursor.execute(query, (userId,))
@@ -45,7 +45,7 @@ def checkUser(userId:int) -> bool:
 def createUser (userId:int, name:str, cellphone_number:str) :
     currentDate = datetime.datetime.now()
     try:
-        con = connectDatabase("auroradb", "aurora", "aurora123", "localhost", "5432")
+        con = connectDatabase("auroradb", "aurora", "aurora123", "localhost", "6432")
         cursor = con.cursor()
         insertQuery = '''
                                 INSERT INTO "auroraAI"."user"
@@ -71,7 +71,7 @@ def createUser (userId:int, name:str, cellphone_number:str) :
 def addMessages(chat_id: uuid.UUID, message_id:  uuid.UUID, body_message: str, user_id: int):
     currentDate = datetime.datetime.now()
     try:
-        con = connectDatabase("auroradb", "aurora", "aurora123", "localhost", "5432")
+        con = connectDatabase("auroradb", "aurora", "aurora123", "localhost", "6432")
         cursor = con.cursor()
         insertQuery = '''
                                 INSERT INTO "auroraAI"."user"
@@ -96,7 +96,7 @@ def addSpending( user_id: int, description_spend: str, value_spend: float):
     currentDate = datetime.datetime.now()
     spend_id = uuid.uuid4()
     try:
-        con = connectDatabase("auroradb", "aurora", "aurora123", "localhost", "5432")
+        con = connectDatabase("auroradb", "aurora", "aurora123", "localhost", "6432")
         cursor = con.cursor()
         insertQuery = '''
                                 INSERT INTO "auroraAI"."spending"
@@ -122,7 +122,7 @@ def getSpending( user_id: int):
     currentDate = datetime.datetime.now()
     spend_id = uuid.uuid4()
     try:
-        con = connectDatabase("auroradb", "aurora", "aurora123", "localhost", "5432")
+        con = connectDatabase("auroradb", "aurora", "aurora123", "localhost", "6432")
         cursor = con.cursor()
         selectQuery = '''
                                 SELECT spend_id, user_id, spend_date, description_spend, value_spend 

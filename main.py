@@ -34,7 +34,7 @@ max_messages = 2
 #Responses
 def handle_response(text: str, userId:str) -> str:
     processed: str = text.lower()
-    users = (userId)
+    users = userId
 
 
     inte = intention(processed, id_model= "gpt-4", max_tokens= 1000)
