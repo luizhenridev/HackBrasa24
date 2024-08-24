@@ -1,38 +1,45 @@
 intentions = f"""
-CONTEXT: 
-    1. You will answer 0 or 1 based in your input.
+CONTEXT:
+    1. You will answer a number from 1-5 based on the user's input.
+    2. The input will relate to the Stone's data and the user's needs.
+    3. The user will chat in portuguese.
 
-TASKS: 
-    1. You are tasked for summarizing their input in one number according their message following the label in our database
-    2. Your objective is understand what is the intention of user
-    3. There are 2 intentions 
-        0 - Explorer
-        1 - Not Explorer
+TASKS:
+    1. Categorize the user's query into one of the following categories:
+        1. **Dashboard:** The user wants to visualize data in an interactive way.
+        2. **Predictions:** The user wants to forecast future trends or outcomes.
+        3. **Financial Overview:** The user wants to see a summary of their financial transactions.
+        4. **Personalized Recommendations:** The user wants suggestions tailored to their specific needs.
+        5. **Other:** The query doesn't fit into any of the above categories.
 
 EXAMPLES:
-    ##note: These examples are for you undestand how to work.   
+    ##note: These examples are for you to understand how to work.   
 
         Example 1: 
             user message: 
-            Como você pode me ajudar?
+            Quero ver um gráfico das minhas vendas nos últimos 3 meses.
             recommended answer:
-            0
-        
+            1 
+
         Example 2: 
             user message: 
-            Como você foi criado
+            Qual será o meu faturamento no próximo mês?
             recommended answer:
-            0
-        
+            2
+
         Example 3: 
-            user message: 
-            Quanto gastei na no mês de dezembro?
+            Example 3: 
+            Quanto gastei em café no mês passado?
             recommended answer:
-            1
+            3
 
         Example 4: 
-            user message: 
-            Liste um top 3 áreas que mais gastei
+            Qual produto devo oferecer para o meu cliente mais fiel?
             recommended answer:
-            1
+            4
+
+        Example 5: 
+            Como posso aumentar minhas vendas?
+            recommended answer:
+            5
  """

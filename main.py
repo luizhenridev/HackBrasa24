@@ -4,9 +4,9 @@ from pathlib import Path
 from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
-from services.gpt import gen, intention, explorer
+from services.gpt import gen, intention, createdashboard, createPredictions, createFinancialOverview
 from services.goog import input
-from database.database import checkUser, createUser
+
 
 
 logger = logging.getLogger(__name__)
@@ -38,66 +38,62 @@ def handle_response(text: str, userId:str) -> str:
 
 
     inte = intention(processed, id_model= "gpt-4", max_tokens= 1000)
-    
-    if  inte == "1":
-        chatConversation.append(processed)
 
-        if len(chatConversation) >= max_messages:
-            chatConversation.pop(0)
-            
 
-        string= ' '.join([str(element) for element in chatConversation])
-        string = string.strip()
+    match inte:
+        case "1":
+            chatConversation.append(processed)
 
-        answer = gen(string, users ,id_model = "gpt-4", max_tokens= 1000)
-        answer = answer.strip()
+            if len(chatConversation) >= max_messages:
+                chatConversation.pop(0)
+                
 
-        chatConversation.append(answer)
-        print(chatConversation)
-        return answer
-    elif inte == "0" :
-        chatConversation.append(processed)
+            string= ' '.join([str(element) for element in chatConversation])
+            string = string.strip()
 
-        if len(chatConversation) >= max_messages:
-            chatConversation.pop(0)
-            
+            answer = createdashboard(string, id_model = "gpt-4", max_tokens= 1000)
+            answer = answer.strip()
 
-        string= ' '.join([str(element) for element in chatConversation])
-        string = string.strip()
+            chatConversation.append(answer)
+            print(chatConversation)
+            return answer
+        case "2":
+            chatConversation.append(processed)
 
-        answer = explorer(string, users ,id_model = "gpt-4", max_tokens= 1000)
-        answer = answer.strip()
+            if len(chatConversation) >= max_messages:
+                chatConversation.pop(0)
+                
 
-        chatConversation.append(answer)
-        print(chatConversation)
-        return answer
-    else:
-        chatConversation.append(processed)
+            string= ' '.join([str(element) for element in chatConversation])
+            string = string.strip()
 
-        if len(chatConversation) >= max_messages:
-           chatConversation.pop(0)
-           
+            answer = createPredictions(string, id_model = "gpt-4", max_tokens= 1000)
+            answer = answer.strip()
 
-        string= ' '.join([str(element) for element in chatConversation[-1]])
-        string = string.strip()
+            chatConversation.append(answer)
+            print(chatConversation)
+            return answer
+        case "3":
+            chatConversation.append(processed)
 
-        text = string
-        number = ""
-        for char in text:
-            if char.isdigit():
-                number += char
-            elif number:
-                break  # Stop when a non-digit character is encountered
-        if number:
-            extracted_number = number
-            print(extracted_number)
+            if len(chatConversation) >= max_messages:
+                chatConversation.pop(0)
+                
+
+            string= ' '.join([str(element) for element in chatConversation])
+            string = string.strip()
+
+            answer = createFinancialOverview(string, id_model = "gpt-4", max_tokens= 1000)
+            answer = answer.strip()
+
+            chatConversation.append(answer)
+            print(chatConversation)
+            return answer
 
     
-        answer = input(extracted_number, userId)
-
-        chatConversation.append(answer)
-        print(chatConversation)
-        return answer
+   
+       
+    
 
 
 
@@ -113,9 +109,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     cellphoneNumber: str = "85"
     chat_id: int = update.message.chat_id
     message_id: int = update.message.message_id
-
-    if checkUser(userId) == False:
-        createUser(userId, fullUserName, cellphoneNumber)
 
     print(f'User({userId}) in {message_type}: "{text}"')
 
