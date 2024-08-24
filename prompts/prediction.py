@@ -34,7 +34,4 @@ Additional Notes:
 You can use data visualization techniques to explore the data and identify patterns.
 Consider using statistical models or machine learning algorithms for forecasting.
 Tailor your insights and recommendations to the specific needs of the business owner.
-
-
-
 """
