@@ -15,6 +15,11 @@ The core of AuroraAI lies in the main.py file, located at the root of the reposi
 - [Installation](#installation)
 - [Dependencies](#dependencies)
 - [Environment Variables](#environment-variables)
+- [Demo](https://youtube.com/shorts/DQJyiQwrAYU?si=2ohSzMAfQJbgk63-) 
+```The transcriptions are in the description and comments```
+- [Pitch]()
+- [Slides](https://docs.google.com/presentation/d/163yx1uurE7I93na1W3IY0FqDk1aMjzuSl4l7q0iyYtQ/edit?usp=sharing)
+- [Database](https://docs.google.com/presentation/d/163yx1uurE7I93na1W3IY0FqDk1aMjzuSl4l7q0iyYtQ/edit?usp=sharing)
 
 ## Installation
 
