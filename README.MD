@@ -17,7 +17,8 @@ The core of AuroraAI lies in the main.py file, located at the root of the reposi
 - [Environment Variables](#environment-variables)
 - [Demo](https://youtube.com/shorts/DQJyiQwrAYU?si=2ohSzMAfQJbgk63-) 
 ```The transcriptions are in the description and in the comments```
-- [Pitch]()
+- [Pitch](https://www.youtube.com/watch?v=hC6txgoVfX4)
+- [Solution](https://web.telegram.org/k/#@AuroraAI_br_bot)
 - [Slides](https://www.canva.com/design/DAGO35XQ_BA/91MnkFUa7DBa2horrju4IQ/edit?utm_content=DAGO35XQ_BA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 - [Database](https://docs.google.com/presentation/d/163yx1uurE7I93na1W3IY0FqDk1aMjzuSl4l7q0iyYtQ/edit?usp=sharing)
 
