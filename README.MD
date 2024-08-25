@@ -46,12 +46,12 @@ Create a .env file with these values
 Telegram
 - TOKEN_BOT
 - BOT_USERNAME
-Follow this to get your own keys https://core.telegram.org/bots/features#creating-a-new-bot
+Follow this [documentation](https://core.telegram.org/bots/features#creating-a-new-bot) to get your own keys
 
 GPT
 - REQUESTER_TOKEN
 
-It is necessary to create your own GPT API KEY. Follow this Youtube Video https://www.youtube.com/watch?v=aVog4J6nIAU
+It is necessary to create your own GPT API KEY. Follow this [Youtube Video](https://www.youtube.com/watch?v=aVog4J6nIAU) https://www.youtube.com/watch?v=aVog4J6nIAU
 
 - LINK= "https://api.openai.com/v1/chat/completions"
 
