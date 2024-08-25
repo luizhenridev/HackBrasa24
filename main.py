@@ -4,7 +4,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
-from services.gpt import gen, intention, createdashboard, createPredictions, createFinancialOverview
+from services.gpt import gen, intention, createdashboard, createPredictions, createFinancialOverview, createRecomendations
 from services.goog import input
 
 
@@ -89,6 +89,39 @@ def handle_response(text: str, userId:str) -> str:
             chatConversation.append(answer)
             print(chatConversation)
             return answer
+        case "4":
+            chatConversation.append(processed)
+
+            if len(chatConversation) >= max_messages:
+                chatConversation.pop(0)
+                
+
+            string= ' '.join([str(element) for element in chatConversation])
+            string = string.strip()
+
+            answer = createRecomendations(string, id_model = "gpt-4", max_tokens= 1000)
+            answer = answer.strip()
+
+            chatConversation.append(answer)
+            print(chatConversation)
+            return answer
+        case _:
+            chatConversation.append(processed)
+
+            if len(chatConversation) >= max_messages:
+                chatConversation.pop(0)
+                
+
+            string= ' '.join([str(element) for element in chatConversation])
+            string = string.strip()
+
+            answer = createRecomendations(string, id_model = "gpt-4", max_tokens= 1000)
+            answer = answer.strip()
+
+            chatConversation.append(answer)
+            print(chatConversation)
+            return answer
+
 
     
    
