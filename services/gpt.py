@@ -9,6 +9,7 @@ from prompts.dashboard import dashboards
 from prompts.prediction import predictions
 from prompts.financialOverView import overView
 from prompts.recomendation import recomendations
+from prompts.open import overall
 
 
 
@@ -142,6 +143,23 @@ def createRecomendations(text: str, id_model: str, max_tokens: int):
     body_message = {
         "model": id_model,
         "messages":[{"role": "system", "content" : recomendations},
+                    {"role": "user", "content": text}],
+        "max_tokens":max_tokens,
+        "temperature": 0.2
+    }
+
+    body_message = json.dumps(body_message)
+
+    requisition = requests.post(LINK, headers=headers, data=body_message)
+    response = requisition.json()
+    responseMessage = response["choices"][0]["message"]["content"]
+    
+    return responseMessage
+
+def aboutBusiness(text: str, id_model: str, max_tokens: int):
+    body_message = {
+        "model": id_model,
+        "messages":[{"role": "system", "content" : overall},
                     {"role": "user", "content": text}],
         "max_tokens":max_tokens,
         "temperature": 0.2

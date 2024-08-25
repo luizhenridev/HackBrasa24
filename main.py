@@ -4,7 +4,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
-from services.gpt import gen, intention, createdashboard, createPredictions, createFinancialOverview, createRecomendations
+from services.gpt import gen, intention, createdashboard, createPredictions, createFinancialOverview, createRecomendations, aboutBusiness
 from services.goog import input
 
 
@@ -115,7 +115,7 @@ def handle_response(text: str, userId:str) -> str:
             string= ' '.join([str(element) for element in chatConversation])
             string = string.strip()
 
-            answer = createRecomendations(string, id_model = "gpt-4", max_tokens= 1000)
+            answer = aboutBusiness(string, id_model = "gpt-4", max_tokens= 1000)
             answer = answer.strip()
 
             chatConversation.append(answer)
