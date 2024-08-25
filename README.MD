@@ -18,7 +18,7 @@ The core of AuroraAI lies in the main.py file, located at the root of the reposi
 - [Demo](https://youtube.com/shorts/DQJyiQwrAYU?si=2ohSzMAfQJbgk63-) 
 ```The transcriptions are in the description and in the comments```
 - [Pitch]()
-- [Slides](https://docs.google.com/presentation/d/163yx1uurE7I93na1W3IY0FqDk1aMjzuSl4l7q0iyYtQ/edit?usp=sharing)
+- [Slides](https://www.canva.com/design/DAGO35XQ_BA/91MnkFUa7DBa2horrju4IQ/edit?utm_content=DAGO35XQ_BA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 - [Database](https://docs.google.com/presentation/d/163yx1uurE7I93na1W3IY0FqDk1aMjzuSl4l7q0iyYtQ/edit?usp=sharing)
 
 ## Installation
@@ -61,6 +61,11 @@ GPT - It is necessary to create your own GPT API KEY. Follow this [Youtube Video
 
 - REQUESTER_TOKEN 
 - LINK= "https://api.openai.com/v1/chat/completions"
+
+## Sources
+- [A pesquisa State of Global Customer Service](https://info.microsoft.com/rs/157-GQE-382/images/EN-CNTNT-Report-DynService-2017-global-state-customer-service.pdf)
+- [Empresas mais lucrativas](https://noticias.gs1br.org/estudo-mostra-que-empresas-movidas-a-dados-sao-22-mais-lucrativas/)
+-[Falta de personalização](https://www.revistavarejobrasil.com.br/a-falta-de-personalizacao-e-engajamento-de-consumidores-prejudica-oportunidades-de-receita-para-varejistas-diz-pesquisa/)
 
 
 
