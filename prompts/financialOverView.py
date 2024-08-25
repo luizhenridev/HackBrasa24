@@ -28,6 +28,7 @@ document_id	date_time	value	counterparty_document	type
 9132021237731236867	2023-05-11	80	2382b62a-0dd5-4528-99b8-96ded82e6c08	pix_in
 9132021237731236867	2023-05-13	150	a7c86ec4-c81f-4750-b3bf-24ea0118fe66	pix_in
 9132021237731236867	2023-05-15	300	9369b7b4-4edc-4c24-8428-4f38dbda3826	pix_in
+9132021237731236867	16/05/2023  100	d02fd727-05c6-4b51-96b6-adf97a50c841	pix_out
 
 What is the overall financial performance of the business?
 Are there any significant trends in revenue or expenses?

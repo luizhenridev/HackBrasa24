@@ -123,15 +123,6 @@ def handle_response(text: str, userId:str) -> str:
             return answer
 
 
-    
-   
-       
-    
-
-
-
-
-
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message_type: str = update.message.chat.type
     text: str = update.message.text

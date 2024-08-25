@@ -1,1 +1,1 @@
-__all__ =["intention","prompt - superhero", "promptFinancialAdvisor","promptFinancialresumido", "summarize", "dashboard"]
+__all__ =["intention", "dashboard", "financialOverView", "open", "prediction", "recomendation"]
