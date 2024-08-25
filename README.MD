@@ -65,7 +65,7 @@ GPT - It is necessary to create your own GPT API KEY. Follow this [Youtube Video
 ## Sources
 - [A pesquisa State of Global Customer Service](https://info.microsoft.com/rs/157-GQE-382/images/EN-CNTNT-Report-DynService-2017-global-state-customer-service.pdf)
 - [Empresas mais lucrativas](https://noticias.gs1br.org/estudo-mostra-que-empresas-movidas-a-dados-sao-22-mais-lucrativas/)
--[Falta de personalização](https://www.revistavarejobrasil.com.br/a-falta-de-personalizacao-e-engajamento-de-consumidores-prejudica-oportunidades-de-receita-para-varejistas-diz-pesquisa/)
+- [Falta de personalização](https://www.revistavarejobrasil.com.br/a-falta-de-personalizacao-e-engajamento-de-consumidores-prejudica-oportunidades-de-receita-para-varejistas-diz-pesquisa/)
 
 
 
